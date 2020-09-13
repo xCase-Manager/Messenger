@@ -5,16 +5,25 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.AssertTrue;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class ExecutionMessageDto {
 
     @NotNull
-    @Min(5)
-    private String executionId;
+    @Min(1)
+    private Long executionId;
 
     @NotNull
-    @Size(min=2, max=30)
+    @Size(min=5, max=30)
+    private String status;
+
+    @Size(max=50)
     private String result;
+
+    @AssertTrue(message = "a result is is required")
+    private boolean isOk() {
+        return (status != "completed" || result != null);
+    }
 }
