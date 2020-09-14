@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.AssertFalse;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = false)
@@ -22,8 +22,8 @@ public class ExecutionMessageDto {
     @Size(max=50)
     private String result;
 
-    @AssertTrue(message = "a result is is required")
+    @AssertFalse(message = "a result is is required")
     private boolean isOk() {
-        return (status != "completed" || result != null);
+        return (this.status.equals("completed") && this.result == null);
     }
 }
