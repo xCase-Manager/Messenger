@@ -29,24 +29,17 @@ targetCompatibility = 1.8
 
 dependencies {
     compileOnly('org.projectlombok:lombok:1.16.20')
-
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter')
-
     compile('org.springframework.boot:spring-boot-starter-validation')
-
     compile('org.springframework:spring-aspects')
-
+    compile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.kafka:spring-kafka')
     compile('io.springfox:springfox-swagger2:2.9.2')
     compile('io.springfox:springfox-swagger-ui:2.9.2')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    compile('org.springframework.kafka:spring-kafka')
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+    compile('org.junit.jupiter:junit-jupiter-api')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
