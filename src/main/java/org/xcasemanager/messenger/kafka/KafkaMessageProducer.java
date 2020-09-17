@@ -24,6 +24,7 @@ public class KafkaMessageProducer {
 
     @Value(value = "${message.kafka.topic}")
     private String messageTopicName;
+    private static final Logger log = LoggerFactory.getLogger(ExecutionMessageDto.class);
 
     public void sendMessage(final ExecutionMessageDto message) {
 
