@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaMessageListener {
 
+    private static final Logger log = LoggerFactory.getLogger(KafkaMessageListener.class);
+
     @KafkaListener(topics = "${message.kafka.topic}")
     public void messageListener(final ConsumerRecord<?, ?> consumerRecord) {
 
