@@ -1,5 +1,6 @@
 package org.xcasemanager.messenger.web.rest.resource;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import javax.validation.constraints.Min;
@@ -25,5 +26,13 @@ public class ExecutionMessageDto {
     @AssertFalse(message = "a result is is required")
     private boolean isOk() {
         return (this.status.equals("completed") && this.result == null);
+    }
+
+    public ExecutionMessageDto(
+          @JsonProperty("executionId") Long executionId,
+          @JsonProperty("status") String status) {
+        this.executionId = executionId;
+        this.status = status;
+        this.result = null;
     }
 }
