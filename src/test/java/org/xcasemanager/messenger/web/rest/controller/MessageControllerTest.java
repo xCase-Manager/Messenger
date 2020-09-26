@@ -27,13 +27,13 @@ class MessageControllerTest {
   private ObjectMapper objectMapper;
 
   @Test
-  void whenValidMessage_thenReturns200() throws Exception {
+  void whenValidMessage_thenReturns201() throws Exception {
 
     ExecutionMessageDto message = new ExecutionMessageDto(1L, "QUEUED");
 
     mockMvc.perform(post("/add")
             .content(objectMapper.writeValueAsString(message))
             .contentType("application/json"))
-            .andExpect(status().isOk());
+            .andExpect(status().isCreated());
   }
 }
