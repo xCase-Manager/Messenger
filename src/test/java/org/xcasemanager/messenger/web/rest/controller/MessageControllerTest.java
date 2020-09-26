@@ -36,4 +36,15 @@ class MessageControllerTest {
             .contentType("application/json"))
             .andExpect(status().isCreated());
   }
+
+  @Test
+  void whenInvalidMessage_thenReturns400() throws Exception {
+
+    ExecutionMessageDto message = new ExecutionMessageDto(1L, "COMPLETED");
+
+    mockMvc.perform(post("/add")
+            .content(objectMapper.writeValueAsString(message))
+            .contentType("application/json"))
+            .andExpect(status().is4xxClientError());
+  }
 }
