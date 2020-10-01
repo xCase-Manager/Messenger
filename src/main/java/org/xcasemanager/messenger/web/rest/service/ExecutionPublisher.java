@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MessageServiceImpl implements MessageService {
+public class ExecutionPublisher implements MessageService {
 
     @Autowired
     private KafkaMessageProducer kafkaMessageProducer;
@@ -17,5 +17,4 @@ public class MessageServiceImpl implements MessageService {
     public void addMessage(final ExecutionMessageDto message) {
         kafkaMessageProducer.sendMessage(message);
     }
-
 }
