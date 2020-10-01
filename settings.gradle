@@ -1,2 +1,8 @@
-rootProject.name = 'xcasemanager-messenger'
+pluginManagement {
+  repositories {
+      mavenLocal()
+      gradlePluginPortal()
+  }
+}
 
+rootProject.name = 'xcasemanager-messenger'
