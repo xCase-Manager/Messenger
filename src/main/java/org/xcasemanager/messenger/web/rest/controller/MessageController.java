@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xcasemanager.messenger.service.MessageService;
-import org.xcasemanager.messenger.web.rest.impl.MessageServiceImpl;
 import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 
 import javax.validation.Valid;
@@ -31,7 +30,6 @@ public class MessageController {
     @ApiResponses(value = {@ApiResponse(code = SWAGGER_HTTP_STATUS_CREATED, message = "Created")})
     public ResponseEntity addMessage(final @Valid @RequestBody ExecutionMessageDto executionMessageDto) {
         messageService.addMessage(executionMessageDto);
-
         return ResponseEntity.accepted().body(executionMessageDto);
     }
 
