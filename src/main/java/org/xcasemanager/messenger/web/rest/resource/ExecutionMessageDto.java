@@ -14,17 +14,17 @@ public class ExecutionMessageDto {
 
     @NotNull
     @Min(1)
-    private Long executionId;
+    public Long executionId;
 
     @NotNull
     @Size(min=5, max=30)
-    private String status;
+    public String status;
 
     @Size(max=50)
-    private String result;
-
+    public String result;
+    
     @AssertFalse(message = "a result is is required")
-    private boolean isOk() {
+    public boolean isOk() {
         return (this.status.equals("completed") && this.result == null);
     }
 
@@ -34,5 +34,5 @@ public class ExecutionMessageDto {
         this.executionId = executionId;
         this.status = status;
         this.result = null;
-    }
+    }   
 }
