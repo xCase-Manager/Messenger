@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.xcasemanager.messenger.service.MessageService;
+import org.xcasemanager.messenger.web.rest.service.ExecutionPublisher;
 import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 
 import javax.validation.Valid;
@@ -17,10 +18,10 @@ import javax.validation.Valid;
 @RequestMapping("v1/message")
 public class MessageController {
 
-    private static final int SWAGGER_HTTP_STATUS_CREATED = 201;
+    private static final int SWAGGER_HTTP_STATUS_CREATED = 202;
 
     @Autowired
-    private MessageService messageService;
+    private ExecutionPublisher messageService;
 
     @ApiOperation(value = "addMessage", nickname = "addMessage")
     @RequestMapping(value = "/add", method = RequestMethod.POST,
@@ -32,5 +33,4 @@ public class MessageController {
         messageService.addMessage(executionMessageDto);
         return ResponseEntity.accepted().body(executionMessageDto);
     }
-
 }
