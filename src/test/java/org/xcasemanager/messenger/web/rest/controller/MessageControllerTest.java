@@ -14,7 +14,6 @@ import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import org.xcasemanager.messenger.web.rest.impl.MessageServiceImpl;
 import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 
 @WebMvcTest(controllers = MessageController.class)
