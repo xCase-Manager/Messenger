@@ -1,4 +1,4 @@
-package org.xcasemanager.messenger.web.rest.impl;
+package org.xcasemanager.messenger.web.rest.service;
 
 import org.xcasemanager.messenger.kafka.KafkaMessageProducer;
 import org.xcasemanager.messenger.service.MessageService;

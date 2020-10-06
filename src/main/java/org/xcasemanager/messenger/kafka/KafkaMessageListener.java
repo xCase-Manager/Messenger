@@ -19,12 +19,8 @@ public class KafkaMessageListener {
     public void messageListener(final ConsumerRecord<?, ?> consumerRecord) {
 
         final ExecutionMessageDto message = (ExecutionMessageDto) consumerRecord.value();
-
-        log.info("####################################################################################");
-        log.info("");
+        log.info("######################################################");
         log.info("Kafka Listener: " + ObjectUtil.javaObjectToJsonString(message));
-        log.info("");
-        log.info("####################################################################################");
+        log.info("######################################################");
     }
-
 }

@@ -1,14 +1,11 @@
 package org.xcasemanager.messenger.kafka;
 
 import lombok.extern.slf4j.Slf4j;
-import org.xcasemanager.messenger.helpers.ObjectUtil;
 import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -28,15 +25,17 @@ public class KafkaMessageProducer {
 
     public void sendMessage(final ExecutionMessageDto message) {
 
-        ListenableFuture<SendResult<String, ExecutionMessageDto>> future = messageKafkaTemplate.send(messageTopicName, message);
-
-        future.addCallback(new ListenableFutureCallback<SendResult<String,ExecutionMessageDto>>() {
-
+        ListenableFuture<SendResult<String, ExecutionMessageDto>> future = 
+            messageKafkaTemplate.send(messageTopicName, message);
+    
+        future.addCallback(new 
+            ListenableFutureCallback<SendResult<String,ExecutionMessageDto>>() {
             @Override
             public void onSuccess(SendResult<String,ExecutionMessageDto> result) {
-                log.info("####################################################################################");
-                log.info("");
-                log.info("Kafka Producer: " + ObjectUtil.javaObjectToJsonString(result.getRecordMetadata()));
+                log.info("######################################################");
+                log.info("Success Callback: [{}] delivered with offset -{}", message,
+                        result.getRecordMetadata().offset());
+                log.info("######################################################");
             }
 
             @Override
@@ -45,7 +44,5 @@ public class KafkaMessageProducer {
                         + message + "] due to : " + ex.getMessage());
             }
         });
-
     }
-
 }
