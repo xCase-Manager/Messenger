@@ -17,6 +17,8 @@ import org.xcasemanager.messenger.web.rest.controller.MessageException;
 import org.xcasemanager.messenger.web.rest.controller.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.xcasemanager.messenger.web.rest.controller.MessageException;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
 
 
 @Slf4j
@@ -36,14 +38,22 @@ public class MessageExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, 
-        HttpHeaders headers, HttpStatus status, WebRequest request) {
-        log.info(" +++++++++---------->> Message error validation");
-        List<String> details = new ArrayList<>();
-        for(ObjectError error : ex.getBindingResult().getAllErrors()) {
-            details.add(error.getDefaultMessage());
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+    MethodArgumentNotValidException ex, 
+    HttpHeaders headers, 
+    HttpStatus status, 
+    WebRequest request) {
+        List<String> errors = new ArrayList<String>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.add(error.getField() + ": " + error.getDefaultMessage());
         }
-        ErrorResponse error = new ErrorResponse("Validation Failed", details);
-        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+        for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
+            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+        }
+        
+        ApiError apiError = 
+        new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+        return handleExceptionInternal(
+        ex, apiError, headers, apiError.getStatus(), request);
     }
 }
