@@ -26,7 +26,7 @@ public class ExecutionMessageDto {
     
     @JsonIgnore
     @AssertFalse(message = "a result is is required")
-    private boolean isOk() {
+    private boolean resultErrorExist() {
         return (this.status.equals("completed") && this.result == null);
     }
 
