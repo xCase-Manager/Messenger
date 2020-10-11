@@ -1,6 +1,7 @@
 package org.xcasemanager.messenger.web.rest.resource;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import javax.validation.constraints.Min;
@@ -23,8 +24,9 @@ public class ExecutionMessageDto {
     @Size(max=50)
     public String result;
     
+    @JsonIgnore
     @AssertFalse(message = "a result is is required")
-    public boolean isOk() {
+    private boolean isOk() {
         return (this.status.equals("completed") && this.result == null);
     }
 
