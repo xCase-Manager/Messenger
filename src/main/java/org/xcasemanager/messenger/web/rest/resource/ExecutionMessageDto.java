@@ -29,12 +29,4 @@ public class ExecutionMessageDto {
     private boolean resultErrorExist() {
         return (this.status.equals("completed") && this.result == null);
     }
-
-    public ExecutionMessageDto(
-          @JsonProperty("executionId") Long executionId,
-          @JsonProperty("status") String status) {
-        this.executionId = executionId;
-        this.status = status;
-        this.result = null;
-    }   
 }
