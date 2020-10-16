@@ -6,7 +6,7 @@ kafka:
   bootstrapAddress: kafka:9092
 message:
   kafka:
-    topic: message-topic00
+    topic: execution
 
 spring.kafka.bootstrap-servers:
   - kafka:9092
