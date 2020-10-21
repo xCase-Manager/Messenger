@@ -39,6 +39,7 @@ public class MessageExceptionHandler extends ResponseEntityExceptionHandler
         
         ApiError apiError = 
         new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+        log.error("Web request error: %s", ex.getLocalizedMessage());    
         return handleExceptionInternal(
         ex, apiError, headers, apiError.getStatus(), request);
     }
