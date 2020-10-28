@@ -1,38 +1,30 @@
 package org.xcasemanager.messenger.web.rest.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import static org.assertj.core.api.Java6Assertions.*;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import static org.mockito.Mockito.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 
 
-import org.springframework.context.annotation.ComponentScan;
-import org.junit.Before;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-@WebMvcTest(controllers = MessageController.class)
-@ComponentScan(basePackages = {"org.xcasemanager.messenger"})
+@AutoConfigureMockMvc
 class MessageControllerTest {
 
+  @Autowired
   private MockMvc mockMvc;
 
   @Autowired
@@ -42,15 +34,6 @@ class MessageControllerTest {
   public void setup() {
     this.mockMvc = MockMvcBuilders.standaloneSetup(
       new MessageControllerTest()).build();
-  }
-
-  @Test
-  public void testHomePage() throws Exception {
-    this.mockMvc.perform(get("/"))
-      .andExpect(status().isOk())
-      .andExpect(view().name("index"))
-      .andDo(MockMvcResultHandlers.print())
-      .andReturn();
   }
 
   @Test
