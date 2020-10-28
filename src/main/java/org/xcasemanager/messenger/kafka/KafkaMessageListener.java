@@ -7,10 +7,10 @@ import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
 public class KafkaMessageListener {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaMessageListener.class);

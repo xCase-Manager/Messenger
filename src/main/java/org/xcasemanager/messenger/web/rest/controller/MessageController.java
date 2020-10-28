@@ -29,7 +29,7 @@ public class MessageController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiResponses(value = {@ApiResponse(code = SWAGGER_HTTP_STATUS_CREATED, message = "Created")})
     public ResponseEntity addMessage(final @Valid @RequestBody ExecutionMessageDto executionMessageDto) {
-        messageService.addMessage(executionMessageDto);  
+        messageService.addMessage(executionMessageDto);
         return ResponseEntity.accepted().body(executionMessageDto);    
     }
 }
