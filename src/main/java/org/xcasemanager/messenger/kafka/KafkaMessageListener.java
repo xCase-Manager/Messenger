@@ -2,7 +2,6 @@ package org.xcasemanager.messenger.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.xcasemanager.messenger.helpers.ObjectUtil;
 import org.xcasemanager.messenger.web.rest.resource.ExecutionMessageDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,10 @@ public class KafkaMessageListener {
     private static final Logger log = LoggerFactory.getLogger(KafkaMessageListener.class);
 
     @KafkaListener(topics = "${message.kafka.topic}")
-    public void messageListener(final ConsumerRecord<?, ?> consumerRecord) {
-
-        final ExecutionMessageDto message = (ExecutionMessageDto) consumerRecord.value();
-        log.info("######################################################");
-        log.info("Kafka Listener: " + ObjectUtil.javaObjectToJsonString(message));
-        log.info("######################################################");
+    public void messageListener(final ConsumerRecord<String, ExecutionMessageDto> record) {
+        log.info("- Message: \n" +
+            "offset = " + record.offset() + "\n" + 
+            "key = " + record.key() + "\n" + 
+            "value = " + record.value() + "\n");
     }
 }
